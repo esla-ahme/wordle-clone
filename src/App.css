@@ -28,4 +28,6 @@
   margin-bottom: 1rem;
 }
 .char-placeholder.correct {background-color: greenyellow;}
+.char-placeholder.wrong-pos {background-color: orange;}
+.char-placeholder.wrong {background-color: #888;}
 

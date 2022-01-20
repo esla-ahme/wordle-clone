@@ -14,7 +14,10 @@ const Keyboard = ({ addChar, incPos, pos, guessed }) => {
   const handleEnter = () => {
     if (guessed[pos].length < WORDLEN) return
     const result = check(guessed[pos])
+    const newGuessed = guessed.slice()
+    newGuessed[pos] = newGuessed[pos].map((a, i) => [a[0], result[i]])
     console.log(result)
+    addChar(newGuessed)
     if (pos === TRIES - 1) return
     incPos((pos + 1) % TRIES)
   }
@@ -23,7 +26,7 @@ const Keyboard = ({ addChar, incPos, pos, guessed }) => {
       if (old[pos] == null) {
         return null
       }
-      let newVal = old.slice()
+      let newVal = old.map(g => g.slice())
       newVal[pos].pop()
 
 
