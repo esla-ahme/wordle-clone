@@ -1,0 +1,10 @@
+button{
+  height: 40px;
+  margin-bottom: 0.5rem;
+  flex:1;
+  border: none;
+  background-color: #ddf;
+}
+.keyboard{
+  width: 80vw;
+}
