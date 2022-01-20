@@ -1,18 +1,22 @@
 import React from "react";
-import { WORDLEN } from "../Game";
+import { NOTCHECKED, WORDLEN } from "../Game";
 
 
-const KeyButton = ({ char, addChar }) => {
+const KeyButton = ({ char, addChar, pos }) => {
   const clickHandle = () => {
-    addChar(old => {
-      if (old == null) {
-        return [char]
-      }
-      if (old.length < WORDLEN) {
-        let newVal = old.slice()
-        newVal.push(char)
-        return newVal
 
+    addChar(old => {
+      if (old[pos] == null) {
+        //deep copy 
+        let newArr = old.map(g => g.slice())
+        newArr[pos] = [[char, NOTCHECKED]]
+        return newArr
+      }
+      if (old[pos].length < WORDLEN) {
+        let newVal = old.map(g => g.slice())
+        newVal[pos].push([char, NOTCHECKED])
+
+        return newVal
       }
       return old
     })

@@ -2,16 +2,10 @@ import React from "react";
 import { TRIES } from "../Game";
 import BoardRow from "./BoardRow";
 
-const GuessBoard = ({ guessed, pos }) => {
+const GuessBoard = ({ guessed }) => {
   const boards = []
   for (let i = 0; i < TRIES; i++) {
-    if (i === pos) {
-      boards.push(<BoardRow guessed={guessed} />)
-    }
-    else {
-      boards.push(<BoardRow guessed={null} />)
-    }
-
+    boards.push(<BoardRow key={i} guessed={guessed[i]} />)
   }
   return (
     <React.Fragment>

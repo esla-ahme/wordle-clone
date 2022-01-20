@@ -26,6 +26,6 @@
   display:grid;
   place-items: center;
   margin-bottom: 1rem;
-
 }
+.char-placeholder.correct {background-color: greenyellow;}
 
