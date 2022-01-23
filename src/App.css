@@ -26,8 +26,7 @@
   display:grid;
   place-items: center;
   margin-bottom: 1rem;
-}
-.char-placeholder.correct {background-color: greenyellow;}
-.char-placeholder.wrong-pos {background-color: orange;}
-.char-placeholder.wrong {background-color: #888;}
+}.correct {background-color: greenyellow;}
+.wrong-pos {background-color: orange;}
+.wrong {background-color: #888;}
 

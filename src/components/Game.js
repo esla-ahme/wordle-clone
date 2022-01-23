@@ -1,7 +1,6 @@
 import React from "react";
 import Keyboard from "./Keyboard/KeyBoard";
 import GuessBoard from "./GuessBoard/GuessBoard";
-
 export const WORDLEN = 5
 export const TRIES = 6
 export const CORRECT = "mango"
@@ -10,13 +9,28 @@ export const NOTCHECKED = 0
 export const CORRECTPOSITION = 1
 export const WRONGPOSITION = 2
 export const WRONG = -1
+const intializeAlph = () => {
+  const charachters = new Map()
+  const temp = 'qwertyuiopasdfghjklzxcvbnm'.split('')
+  for (const c of temp) {
+    charachters.set(c, NOTCHECKED)
+  }
+  return charachters
+}
 const Game = () => {
-  const [guess, setGuess] = React.useState(new Array(TRIES))
+  const [grid, setGrid] = React.useState(new Array(TRIES))
+  const [charachters, setCharachters] = React.useState(intializeAlph())
   const [pos, usePos] = React.useState(0)
+  const [message, useMessage] = React.useState("Go On")
   return (
     <div className="game">
-      <GuessBoard guessed={guess} />
-      <Keyboard guessed={guess} addChar={setGuess} incPos={usePos} pos={pos} />
+      <GuessBoard grid={grid} charachters={charachters} />
+      <Keyboard
+        charachters={charachters} updateCharachters={setCharachters}
+        grid={grid} updateGrid={setGrid}
+        incPos={usePos} pos={pos}
+        addMessage={useMessage} />
+      <p>{message}</p>
     </div>
   )
 }
