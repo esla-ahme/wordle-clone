@@ -4,7 +4,6 @@ import { CORRECT, TRIES, WORDLEN } from "../Game";
 import './keyboard.css'
 import { check } from "../../utils/checkCorrectness";
 import { checkWord } from "../../utils/words";
-import { add } from "mathjs";
 
 const ROW1 = 'qwertyuiop'.split('')
 const ROW2 = 'asdfghjkl'.split('')
