@@ -11,6 +11,7 @@ export const NOTCHECKED = 0
 export const CORRECTPOSITION = 1
 export const WRONGPOSITION = 2
 export const WRONG = -1
+
 const intializeAlph = () => {
   const charachters = new Map()
   const temp = 'qwertyuiopasdfghjklzxcvbnm'.split('')
@@ -19,7 +20,9 @@ const intializeAlph = () => {
   }
   return charachters
 }
+
 const Game = () => {
+  console.log(CORRECT)
   const [grid, setGrid] = React.useState(new Array(TRIES))
   const [charachters, setCharachters] = React.useState(intializeAlph())
   const [pos, usePos] = React.useState(0)
@@ -38,5 +41,3 @@ const Game = () => {
 }
 
 export default Game;
-//https://www.npmjs.com/package/check-word
-//https://www.npmjs.com/package/random-words

@@ -16,7 +16,7 @@ const Keyboard = ({ updateGrid, incPos, pos, grid, addMessage, charachters, upda
     if (grid[pos].length < WORDLEN) return
     const guessedWord = grid[pos].map(l => l[0]).join("")
     if (!checkWord(guessedWord)) {
-      addMessage("This word is not in out dict")
+      addMessage("This word is not in our dict")
       return
     } else {
       addMessage("Go On")

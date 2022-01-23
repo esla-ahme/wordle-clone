@@ -1,32 +1,38 @@
-.App{
-  text-align: center;
-  background-color: #eee;
-
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
-.game{
-  display:grid;
+body{
+  background-color: #eee;
+        display:grid;
   place-items: center;
   width: 100vw;
 }
+.App{
+  text-align: center;
+}
+.game{  
+  width: 100%;
+  max-width: 756px;
+  padding: 1rem;
+}
 .flex{
   display: flex;
-  width: 100%;
   gap: 0.5rem;
   justify-content: space-between;
 }
-.board-row{
-  width:60vw
-}
+
 .char-placeholder{
   background-color: #cdf;
-  width: 50px;
+  min-width: 50px;
   color: black;
   font-size: 1.5rem;
   height: 50px;
   display:grid;
   place-items: center;
   margin-bottom: 1rem;
-}.correct {background-color: greenyellow;}
-.wrong-pos {background-color: orange;}
+}.correct {background-color: rgb(32, 184, 75);}
+.wrong-pos {background-color: rgb(248, 178, 25);}
 .wrong {background-color: #888;}
-
+.active{background-color: #ded;}
