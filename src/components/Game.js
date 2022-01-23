@@ -1,9 +1,12 @@
 import React from "react";
 import Keyboard from "./Keyboard/KeyBoard";
 import GuessBoard from "./GuessBoard/GuessBoard";
+import { getRandomWord } from "../utils/words";
+
 export const WORDLEN = 5
 export const TRIES = 6
-export const CORRECT = "mango"
+export const CORRECT = getRandomWord()
+console.log(CORRECT)
 
 export const NOTCHECKED = 0
 export const CORRECTPOSITION = 1

@@ -3,6 +3,8 @@ import KeyButton from "./KeyButton";
 import { CORRECT, TRIES, WORDLEN } from "../Game";
 import './keyboard.css'
 import { check } from "../../utils/checkCorrectness";
+import { checkWord } from "../../utils/words";
+import { add } from "mathjs";
 
 const ROW1 = 'qwertyuiop'.split('')
 const ROW2 = 'asdfghjkl'.split('')
@@ -12,10 +14,15 @@ const ROW3 = 'zxcvbnm'.split('')
 const Keyboard = ({ updateGrid, incPos, pos, grid, addMessage, charachters, updateCharachters }) => {
 
   const handleEnter = () => {
-    console.log(grid)
     if (grid[pos].length < WORDLEN) return
-
-    const result = check(grid[pos])
+    const guessedWord = grid[pos].map(l => l[0]).join("")
+    if (!checkWord(guessedWord)) {
+      addMessage("This word is not in out dict")
+      return
+    } else {
+      addMessage("Go On")
+    }
+    const result = check(guessedWord)
     let chCopy = new Map(charachters)
     let newGrid = grid.slice()
     result.forEach((r, i) => {
@@ -25,7 +32,14 @@ const Keyboard = ({ updateGrid, incPos, pos, grid, addMessage, charachters, upda
     updateCharachters(chCopy)
     updateGrid(newGrid)
     chCopy = null
-    if (pos === TRIES - 1) return
+    if (result.join("") == '11111') {
+      addMessage("WINNER")
+      return
+    }
+    if (pos === TRIES - 1) {
+      addMessage("you lost the word was: " + CORRECT)
+      return
+    }
     incPos((pos + 1) % TRIES)
   }
 
