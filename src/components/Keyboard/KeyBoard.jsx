@@ -31,7 +31,7 @@ const Keyboard = ({ updateGrid, incPos, pos, grid, addMessage, charachters, upda
     updateCharachters(chCopy)
     updateGrid(newGrid)
     chCopy = null
-    if (result.join("") == '11111') {
+    if (result.join("") === '11111') {
       addMessage("WINNER")
       return
     }
