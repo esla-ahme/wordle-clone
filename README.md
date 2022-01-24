@@ -1,5 +1,6 @@
 Try online 
-[Wordle-clone](https://61edaad5c1e37218cb2d91f5--adoring-joliot-0c66b2.netlify.app/) 
+[Wordle-clone](https://wordle-forever.netlify.app/) 
+
 In the project directory, you can run:
 ### `npm i`
 ### `npm start`
