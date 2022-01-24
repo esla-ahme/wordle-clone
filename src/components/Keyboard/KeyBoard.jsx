@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import KeyButton from "./KeyButton";
-import { CORRECT, TRIES, WORDLEN } from "../Game";
+import { alphapet, CORRECT, NOTCHECKED, TRIES, WORDLEN } from "../Game";
 import './keyboard.css'
 import { check } from "../../utils/checkCorrectness";
 import { checkWord } from "../../utils/words";
@@ -11,9 +11,54 @@ const ROW3 = 'zxcvbnm'.split('')
 
 
 const Keyboard = ({ updateGrid, incPos, pos, grid, addMessage, charachters, updateCharachters }) => {
+  useEffect(
+    () => {
+      document.addEventListener('keydown', handleKeyPress, { capture: true })
+      return () => {
+        document.removeEventListener('keydown', handleKeyPress, { capture: true })
+      }
+    }
+  )
+
+
+  const handleKeyPress = (e) => {
+    if (e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault()
+      handleEnter()
+    }
+    if (e.key === 'Backspace') {
+      e.preventDefault()
+      removeHandle()
+    }
+    if (alphapet.includes(e.key)) {
+      clickHandle(e.key)
+    }
+  }
+  const clickHandle = (char) => {
+
+    updateGrid(old => {
+      if (old[pos] == null) {
+        //deep copy 
+        let newArr = old.map(g => g.slice())
+        newArr[pos] = [[char, NOTCHECKED]]
+
+        return newArr
+      }
+      if (old[pos].length < WORDLEN) {
+        let newVal = old.map(g => g.slice())
+        newVal[pos].push([char, NOTCHECKED])
+
+        return newVal
+      }
+      return old
+    })
+  }
 
   const handleEnter = () => {
-    if (grid[pos].length < WORDLEN) return
+    if (!grid[pos] || grid[pos]?.length < WORDLEN) {
+      addMessage("Complete the word")
+      return
+    }
     const guessedWord = grid[pos].map(l => l[0]).join("")
     if (!checkWord(guessedWord)) {
       addMessage("This word is not in our dict")
@@ -56,23 +101,23 @@ const Keyboard = ({ updateGrid, incPos, pos, grid, addMessage, charachters, upda
     })
   }
   return (
-    <main className="keyboard">
+    <main className="keyboard" >
       <div className="flex">
         {ROW1.map(c =>
-          <KeyButton charachters={charachters}
-            addChar={updateGrid} key={c} char={c} pos={pos} />
+          <KeyButton clickHandle={clickHandle} charachters={charachters}
+            key={c} char={c} />
         )}
       </div>
       <div className="flex">
         {ROW2.map(c =>
-          <KeyButton charachters={charachters}
-            addChar={updateGrid} key={c} char={c} pos={pos} />)}
+          <KeyButton clickHandle={clickHandle} charachters={charachters}
+            key={c} char={c} />)}
       </div>
       <div className="flex">
         <button onClick={handleEnter} >{"Enter"}</button>
         {ROW3.map(c =>
-          <KeyButton charachters={charachters}
-            addChar={updateGrid} key={c} char={c} pos={pos} />)}
+          <KeyButton clickHandle={clickHandle} charachters={charachters}
+            key={c} char={c} />)}
         <button onClick={removeHandle}>{"<="}</button>
 
       </div>
